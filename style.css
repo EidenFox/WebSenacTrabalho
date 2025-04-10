@@ -2,83 +2,88 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* background-color: #3a3a3a; */
     color: aliceblue;
 }
-
-.glass-effect {
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.22);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8.9px);
-    -webkit-backdrop-filter: blur(8.9px);
-    border: 1px solid rgba(255, 255, 255, 0.51);
-}
-
 
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 350px;
+    width: 100%;
+    min-height: 25vh;
     background-image: url('https://images3.alphacoders.com/133/thumb-1920-1332803.png');
     background-size: cover;
     background-position: center 60%;
     box-shadow: #ff0073 0px 2px 15px;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     margin-bottom: 1rem;
-
-
+    min-width: 500px;
 }
 
-body{
+body {
     background-color: #3a3a3a;
-    background-image:  url('img/1354199.jpeg');
+    background-image: url('img/1354199.jpeg');
     background-size: cover;
     background-attachment: fixed;
-    
-}
+    width: 100%;
+    height: auto;
+  }
 
-body>h3, body>h2, body>ul>li{
+body>h3, body>h2{
     /* From https://css.glass */
     padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.22);
-    border-radius: 5px;
+    background: rgba(182, 182, 182, 0.22);
+    border-radius: 0.5rem;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.9px);
     -webkit-backdrop-filter: blur(8.9px);
     border: 1px solid rgba(255, 0, 123, 0.51);
+    min-width: 500px;
 }
 
 h1{
     padding: 3rem;
-    /* padding-left: 100px; */
-    /* padding-right: 100px; */
-    
+    padding-left: 3rem;
+    padding-right: 3rem;
     background: rgba(255, 255, 255, 0.13);
-    border-radius: 1rem;
+    border-radius: 2rem;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-
+    text-align: center;
     text-shadow: #ff008c 3px 3px;
     font-family: 'Merienda', cursive;
+}
+
+h2, h3{
     text-align: center;
 }
 
-h2{
-    text-align: center;
-}
-
-ul, h3{
+ul{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 5px;
+}
+
+li{
     list-style: none;
+    margin: 1.3rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 0, 123, 0.5);
+    background: rgba(182, 182, 182, 0.22);
+}
+
+li:hover{
+    background-color: rgba(51, 0, 46, 0.5); 
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 0px 30px rgba(255, 0, 225, 0.482);
 }
 
 
@@ -93,9 +98,9 @@ a:hover{
 
 
 div>div{
-    padding: 25px;
+    padding: 1.5rem;
     border: #ff008c 2px solid;
-    min-width: 500px;
+    min-width: 31.25rem;
 }
 
 
@@ -107,24 +112,23 @@ div>div{
     backdrop-filter: blur(8.9px);
     -webkit-backdrop-filter: blur(8.9px);
     border: 1px solid rgba(255, 0, 0, 0.51);
-    }
+}
+
 
 .anime img {
     width: 100%;
-    max-width: 300px;
-    height: 500px;
+    max-width: 18.75rem;
+    height: 31.25rem;
     border-radius: 16px;
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.5);
 }
 
-.anime img:hover {
-
-}
 
 .anime p {
     text-shadow: #b33d3d 0px 2px;
     width: 100%;
-    max-width: 400px;
+    width: 25rem;
+    max-width: 25rem;
     border-radius: 16px;
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.5);
     padding: 10px;
@@ -135,8 +139,7 @@ div>div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    max-width:45%;
+    gap: 10px;
 }
 
 .anime-container {
@@ -147,6 +150,7 @@ div>div{
     flex-wrap: wrap;
     text-align: center;
 }
+
 body::before {
     content: "";
     position: fixed;
@@ -158,7 +162,34 @@ body::before {
     z-index: -1;
 }
 
-/* FONTES */
+footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 10rem;
+        background-image: url('https://images3.alphacoders.com/133/thumb-1920-1332803.png');
+        background-size: cover;
+        background-position: center 60%;
+        box-shadow: #ff0073 0px 2px 15px;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        min-width: 500px;
+}
+
+footer>p {
+    padding: 0.9rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border: 1px solid rgba(255, 0, 123, 0.5);
+    background: rgba(182, 182, 182, 0.22);
+
+}    
+
+    /* FONTES */
 .permanent-marker-regular {
     font-family: "Permanent Marker", cursive;
     font-weight: 600;
@@ -172,3 +203,4 @@ body::before {
     font-style: normal;
   }
 /* FONTES */
+
