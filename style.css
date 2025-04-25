@@ -1,7 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     color: aliceblue;
 }
 
@@ -17,7 +16,6 @@ header {
     box-shadow: #ff0073 0px 2px 15px;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
-    min-width: 500px;
 }
 
 body {
@@ -25,7 +23,6 @@ body {
     background-image: url('img/1354199.jpeg');
     background-size: cover;
     background-attachment: fixed;
-    width: 100%;
     height: auto;
   }
 
@@ -38,7 +35,6 @@ body>h3, body>h2{
     backdrop-filter: blur(8.9px);
     -webkit-backdrop-filter: blur(8.9px);
     border: 1px solid rgba(255, 0, 123, 0.51);
-    min-width: 500px;
 }
 
 h1{
@@ -97,10 +93,10 @@ a:hover{
 }
 
 
+
 div>div{
     padding: 1.5rem;
     border: #ff008c 2px solid;
-    min-width: 31.25rem;
 }
 
 
@@ -127,7 +123,6 @@ div>div{
 .anime p {
     text-shadow: #b33d3d 0px 2px;
     width: 100%;
-    width: 25rem;
     max-width: 25rem;
     border-radius: 16px;
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.5);
@@ -175,7 +170,6 @@ footer {
         box-shadow: #ff0073 0px 2px 15px;
         border-radius: 0.5rem;
         margin-top: 1rem;
-        min-width: 500px;
 }
 
 footer>p {
