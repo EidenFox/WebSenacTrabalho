@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <style>
+        body{
+            background: #f873ff;
+            background: linear-gradient(180deg, rgba(248, 115, 255, 1) 0%, rgba(183, 73, 214, 1) 25%, rgba(165, 51, 196, 1) 50%, rgba(131, 11, 179, 1) 75%, rgba(89, 4, 138, 1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* height: fullvh; */
+        }
+        button{
+        color:aliceblue;
+        list-style: none;
+        margin: 1.3rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        border: 1px solid rgba(255, 0, 123, 0.5);
+        background: rgba(182, 182, 182, 0.22);
+        }
+        button:hover{
+            background-color: rgba(51, 0, 46, 0.5); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 0px 30px rgba(255, 0, 225, 0.482);
+        }
+        img{
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+
+
+    <script>
+        function happySad() {
+            if (document.getElementById('Lampada').src.endsWith('bulbOFF.png')) {
+                document.getElementById('Lampada').src = '/imagens/bulbON.png';
+
+                document.getElementById('Cachorro').src = 'https://th.bing.com/th/id/R.9003028d7ec6ff58a70a2be15a05ffed?rik=9cLEFO6s9oiGeg&riu=http%3a%2f%2fwww.publicdomainpictures.net%2fpictures%2f40000%2fvelka%2fgolden-retriever-dog-1364426710r9x.jpg&ehk=Z8ZK9mRUJe0rT61EYByfWPUGg1BEToYpGPK3bCz1aTU%3d&risl=&pid=ImgRaw&r=0';
+
+                document.getElementById('hsButton').innerHTML = '❌💡=😒';
+
+            } else {
+                document.getElementById('Lampada').src = '/imagens/bulbOFF.png';
+
+                document.getElementById('Cachorro').src = 'https://th.bing.com/th/id/R.bb0509dabc3baee24175275d9bb4a2c7?rik=cnRNIjTT%2fb95Cg&riu=http%3a%2f%2fwww.dogwallpapers.net%2fwallpapers%2fsad-golden-retriever-dog-photo.jpg&ehk=EZXYEC3eRU%2f40MBoB%2bMUn6E31Y1wU5ji8MS0ffta2qY%3d&risl=&pid=ImgRaw&r=0';
+
+                document.getElementById('hsButton').innerHTML = '💡=😊';
+            }
+
+            // if (document.getElementById('Lampada').src.endsWith('bulbON.png')) {
+            //     document.getElementById('hsButton').innerHTML = '❌💡=😒';
+            // } else {
+            //     document.getElementById('hsButton').innerHTML = '💡=😊';
+            // }
+
+        }
+
+        function altDog() {
+            if (document.getElementById('Cachorro').src.endsWith('dog-photo.jpg&ehk=EZXYEC3eRU%2f40MBoB%2bMUn6E31Y1wU5ji8MS0ffta2qY%3d&risl=&pid=ImgRaw&r=0')) {
+                document.getElementById('Cachorro').src = 'https://th.bing.com/th/id/R.9003028d7ec6ff58a70a2be15a05ffed?rik=9cLEFO6s9oiGeg&riu=http%3a%2f%2fwww.publicdomainpictures.net%2fpictures%2f40000%2fvelka%2fgolden-retriever-dog-1364426710r9x.jpg&ehk=Z8ZK9mRUJe0rT61EYByfWPUGg1BEToYpGPK3bCz1aTU%3d&risl=&pid=ImgRaw&r=0';
+            } else {
+                document.getElementById('Cachorro').src = 'https://th.bing.com/th/id/R.bb0509dabc3baee24175275d9bb4a2c7?rik=cnRNIjTT%2fb95Cg&riu=http%3a%2f%2fwww.dogwallpapers.net%2fwallpapers%2fsad-golden-retriever-dog-photo.jpg&ehk=EZXYEC3eRU%2f40MBoB%2bMUn6E31Y1wU5ji8MS0ffta2qY%3d&risl=&pid=ImgRaw&r=0';
+            }
+        }
+    </script>
+    
+
+</head>
+<body>
+    
+    <h2>O que o JavaScript pode fazer?</h2>
+
+    <p>JavaScript pode alterar os valores de atributo HTML</p>
+
+    <p>Nesse caso o JavaScript altera o valor do atributo sct (fonte) de uma imagem</p>
+
+    <img src="/imagens/bulbOFF.png" width="300px" id="Lampada">
+
+    <img src="https://images.ctfassets.net/m5ehn3s5t7ec/wp-image-197645/ebb53a9acfebebaf0b7cdfd540ff6040/Jack-Russell-Terrier-Dog-Breed-Information.jpg" width="300px" id="Cachorro">
+    
+    <br>
+
+    <button onclick="document.getElementById('Lampada').src='/imagens/bulbON.png'">Acender Lampada</button>
+
+    <button onclick="document.getElementById('Lampada').src='/imagens/bulbOFF.png'">Apagar Lampada</button>
+
+    <button onclick="altDog()">Alternar Cachorro</button>
+    
+    <button onclick="happySad()" id="hsButton">💡=😊</button>
+
+    <p id="teste"></p>
+   
+
+</body>
+</html>

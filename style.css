@@ -1,9 +1,11 @@
+/* css reset */
 *{
     margin: 0;
     padding: 0;
     color: aliceblue;
 }
 
+/* Header */
 header {
     display: flex;
     justify-content: center;
@@ -18,6 +20,7 @@ header {
     margin-bottom: 1rem;
 }
 
+/* Body */
 body {
     background-color: #3a3a3a;
     background-image: url('img/1354199.jpeg');
@@ -26,6 +29,8 @@ body {
     height: auto;
   }
 
+/* Separadores do Body 
+(Informações e "Minhas recomendações) */
 body>h3, body>h2{
     /* From https://css.glass */
     padding: 0.5rem;
@@ -37,6 +42,7 @@ body>h3, body>h2{
     border: 1px solid rgba(255, 0, 123, 0.51);
 }
 
+/* Titulo da página */
 h1{
     padding: 3rem;
     padding-left: 3rem;
@@ -52,10 +58,12 @@ h1{
     font-family: 'Merienda', cursive;
 }
 
+/* Alinhamento de todos os H2 e H3 */
 h2, h3{
     text-align: center;
 }
 
+/* Alinhamento das UL */
 ul{
     display: flex;
     justify-content: center;
@@ -63,6 +71,7 @@ ul{
     flex-wrap: wrap;
 }
 
+/* Aparencia dos itens da lista*/
 li{
     list-style: none;
     margin: 1.3rem;
@@ -75,6 +84,7 @@ li{
     background: rgba(182, 182, 182, 0.22);
 }
 
+/* Efeito de hover nos itens da lista */
 li:hover{
     background-color: rgba(51, 0, 46, 0.5); 
     backdrop-filter: blur(5px);
@@ -82,26 +92,23 @@ li:hover{
     box-shadow: 0 0px 30px rgba(255, 0, 225, 0.482);
 }
 
-
+/* Cor do link e fonte */
 a{
     color: aquamarine;
     font-family: 'Merienda', cursive;
 }
 
+/* Efeito de Hover, mudança de cor no link */
 a:hover{
     color: aqua;
 }
 
-
-
+/* Aparencias das Divs internas 
+(div dentro de outra div) */
 div>div{
     padding: 1.5rem;
     border: #ff008c 2px solid;
-}
 
-
-div>div{
-    /* From https://css.glass */
     background: rgba(255, 255, 255, 0.22);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -110,7 +117,7 @@ div>div{
     border: 1px solid rgba(255, 0, 0, 0.51);
 }
 
-
+/* Tamanho e aparencia das IMAGENS dos animes */
 .anime img {
     width: 100%;
     max-width: 18.75rem;
@@ -119,7 +126,7 @@ div>div{
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.5);
 }
 
-
+/* Tamanho e detalhes dos Paragrafos na lista de animes */
 .anime p {
     text-shadow: #b33d3d 0px 2px;
     width: 100%;
@@ -130,13 +137,15 @@ div>div{
 
 }
 
+/* Alinhamento e display da lista de animes */
 .anime {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
-
+/* Define o padrão dos containes dos animes 
+(tamanho, espaçamento, alinhamento) */
 .anime-container {
     display: flex;
     justify-content:space-evenly;
@@ -146,6 +155,7 @@ div>div{
     text-align: center;
 }
 
+/* Aplica um efeiro de Blurr no body*/
 body::before {
     content: "";
     position: fixed;
@@ -157,6 +167,7 @@ body::before {
     z-index: -1;
 }
 
+/* Estiliza o Footer com a imagem, sombra, e alinha os items e atributos*/
 footer {
         display: flex;
         flex-direction: column;
@@ -172,6 +183,7 @@ footer {
         margin-top: 1rem;
 }
 
+/* Estiliza o paragrafo do Footer com efeito de Blurr, e borda */
 footer>p {
     padding: 0.9rem;
     border-radius: 0.5rem;
