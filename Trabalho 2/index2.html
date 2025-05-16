@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+
+<script>
+    var i = 1;
+    function clicker(){
+        document.getElementById("clicks").innerHTML = i;
+        i++;
+    }
+</script>
+
+
+<body>
+    <div class="container">
+        <h3><label for="">Quantidade de cliques</label></h3>
+        <br>
+        <p id="clicks"> 0 </p>
+        <br>
+        <button onclick="clicker()">Clicar</button>
+    </div>
+    
+    <footer>
+        <div class="footer">
+            <p>Desenvolvido por: Daniel e Ruan</p>
+            <ul>
+                <li><a href="index.html">Pagina Inicial</a></li>
+                <li><a href="index2.html">Sobre</a></li>
+                <li><a href="index3.html">Lista</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
