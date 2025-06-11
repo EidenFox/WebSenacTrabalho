@@ -14,7 +14,19 @@
     <title>Carlos Fortes</title>
 </head>
 <body>
-    <audio id="bg-music" src="/Carlos/Dance of the Sugar Plum Fairy (Piano Version) - Tchaikovsky, Nutcracker.mp3" autoplay loop style="display:none;"></audio>
+    <audio id="bg-music" src="/Carlos/bgm.mp3" autoplay loop controls></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('bg-music');
+            audio.volume = 0.5;
+            // Try to play audio after user interaction (required by browsers)
+            function enableAudio() {
+                audio.play();
+                document.removeEventListener('click', enableAudio);
+            }
+            document.addEventListener('click', enableAudio);
+        });
+    </script>
     <h1 id="mexe">Carlos Fortes</h1>
     
     
