@@ -21,12 +21,16 @@ header {
 }
 
 /* Body */
-body {
+body {    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #3a3a3a;
     background-image: url('img/1354199.jpeg');
     background-size: cover;
     background-attachment: fixed;
-    height: auto;
+    margin: 0;
+
   }
 
 /* Separadores do Body 
@@ -124,6 +128,10 @@ div>div{
     border-radius: 16px;
     box-shadow: 0 2px 15px rgba(255, 0, 0, 0.5);
 }
+.anime img:hover {
+    background-color: #3a3a3a;
+    
+}
 
 /* Tamanho e detalhes dos Paragrafos na lista de animes */
 .anime p {
@@ -136,13 +144,33 @@ div>div{
 
 }
 
+
 /* Alinhamento e display da lista de animes */
 .anime {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    /* height: 100%; */
 }
+
+
+/* Botoẽs dos links dos animes */
+.botao_animes {
+    margin-top: auto; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lista-anime {
+    flex: 1; /* Faz a seção crescer para ocupar todo o espaço disponível */
+    display: flex;
+    flex-direction: column;
+}
+
 /* Define o padrão dos containes dos animes 
 (tamanho, espaçamento, alinhamento) */
 .anime-container {
@@ -152,6 +180,7 @@ div>div{
     margin-top: 50px;
     flex-wrap: wrap;
     text-align: center;
+    width: 100%;
 }
 
 /* Aplica um efeiro de Blurr no body*/
@@ -199,13 +228,13 @@ footer>p {
     font-family: "Permanent Marker", cursive;
     font-weight: 600;
     font-style: normal;
-  }
+}
 
 .merienda-uniquifier {
     font-family: "Merienda", cursive;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-  }
+}
     /* FONTES */
 
