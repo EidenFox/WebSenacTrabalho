@@ -1,6 +1,5 @@
 /* Reset */
 * {
-    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -8,6 +7,7 @@
 /* Body */
 body {
     display: flex;
+    margin: 0;
     flex-direction: column;
     min-height: 100vh;
     background-color: #3a3a3a;
@@ -16,7 +16,13 @@ body {
     background-attachment: fixed;
     font-family: 'Merienda', cursive;
     color: black;
+    min-height: 100vh;
     height: 5rem;
+}
+
+.content {
+    padding: 40px;
+    flex: 1;
 }
 
 /* Header */
@@ -118,8 +124,7 @@ footer {
     background-size: cover;
     background-position: center 60%;
     box-shadow: #ff0073 0px 2px 15px;
-    border-radius: 0.5rem;
-    margin-top: 1rem;
+    margin-top: auto;
 }
 
 footer p {
@@ -130,6 +135,6 @@ footer p {
     -webkit-backdrop-filter: blur(9px);
     border: 1px solid rgba(255, 0, 123, 0.5);
     background: rgba(182, 182, 182, 0.22);
-    color: black;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
