@@ -5,12 +5,14 @@
     --border-glass: rgba(255, 0, 115, 0.5);
 }
 
+
 /* css reset */
 *{
     margin: 0;
     padding: 0;
-    color: aliceblue;
+    /* color: aliceblue; */
 }
+
 
 /* Header */
 header {
@@ -37,6 +39,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
+    color: aliceblue;
 
   }
 
