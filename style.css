@@ -39,9 +39,15 @@ body {
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
-    color: aliceblue;
-
+    /* color: aliceblue; */
   }
+.bodyy{
+    color: aliceblue;
+}
+
+.footerr{
+    color: aliceblue;
+}
 
 /* Separadores do Body 
 (Informações e "Minhas recomendações) */

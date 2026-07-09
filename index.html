@@ -19,37 +19,41 @@
         rel="stylesheet">
     <link rel="icon" type="image/i-icon" href="img/favicon.ico" />
 
-    <title>Meus animes favoritos</title>
+    <script src="animes.js"></script>
 
-    <script class="chatJS" src='https://hub.notificame.com.br/schedule/webchat.js'></script>
+    <title>Meus animes favoritos</title>
 </head>
 
 <body class="body-background">
-    <header>
-        <div class="header-div">
-            <h1>Recomendações de Animes</h1>
-        </div>
-    </header>
+    <section class="bodyy">
+
+        <header>
+            <div class="header-div">
+                <h1>Recomendações de Animes</h1>
+            </div>
+        </header>
 
 
-    <h3>Informações e onde assistir: </h3>
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="https://myanimelist.net" target="_blank">MyAnimeList</a></li>
-            <li><a href="https://m.wcostream.tv/" target="_blank">Wcostream</a></li>
-            <li><a href="https://www.crunchyroll.com/pt-br/" target="_blank">Crunchyroll</a></li>
-            <li><a href="https://animekai.to/home" target="_blank">Anime Kai</a></li>
-            <li><a href="https://everythingmoe.com/" target="_blank">EverythingMoe</a></li>
-        </ul>
-    </nav>
+        <h3>Informações e onde assistir: </h3>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="https://myanimelist.net" target="_blank">MyAnimeList</a></li>
+                <li><a href="https://m.wcostream.tv/" target="_blank">Wcostream</a></li>
+                <li><a href="https://www.crunchyroll.com/pt-br/" target="_blank">Crunchyroll</a></li>
+                <li><a href="https://animekai.to/home" target="_blank">Anime Kai</a></li>
+                <li><a href="https://everythingmoe.com/" target="_blank">EverythingMoe</a></li>
+            </ul>
+        </nav>
 
 
-    <h2>Minhas Recomendações de anime</h2>
+        <h2>Minhas Recomendações de anime</h2>
 
-    <section class="lista-anime">
-        <div class="anime-container" id="anime-list">
-        </div>
+        <section class="lista-anime">
+            <div class="anime-container" id="anime-list">
+            </div>
+        </section>
     </section>
+
     <section class="chat">
         <script>
 
@@ -59,7 +63,7 @@
 
             window.chatNotificationSound = './universfield-new-notification-040-493469.mp3';
 
-            window.chatHeaderColor = '#7a005a';
+            window.chatHeaderColor = '#66012e17';
 
             window.chatHeaderIcon = 'https://eidenfox.xyz/img/favicon.ico';
 
@@ -80,16 +84,183 @@
             window.chatNotificaEncerrar = '0';
 
         </script>
+
+        <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>
+        <script>
+            function aplicarModificacoesChat() {
+                const container = document.getElementById('notificame-chat-container');
+
+                if (container && container.shadowRoot) {
+
+                    // 1. Injeta o CSS do Tema e Media Queries
+                    if (!container.shadowRoot.getElementById('chat')) {
+                        const darkThemeStyle = document.createElement('style');
+                        darkThemeStyle.id = 'chat';
+
+                        darkThemeStyle.innerHTML = `
+                    /* Aumentando o tamanho padrão do chat no Desktop */
+                    #chat-popup {
+                        width: 380px !important; 
+                    }
+                    #chatbox {
+                        height: 450px !important;
+                    }
+
+                    /* Fundo geral do popup simulando o estilo do site principal */
+                    #chat-popup, 
+                    .user-info-container, 
+                    #chat-popup.open { 
+                        background: rgba(18, 1, 24, 0.85) !important; 
+                        backdrop-filter: blur(12px) !important;
+                        -webkit-backdrop-filter: blur(12px) !important;
+                        border: 1px solid rgba(255, 0, 123, 0.5) !important;
+                        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+                        color: aliceblue !important; 
+                    }
+                    
+                    /* Fundos transparentes */
+                    #chatbox, #chat-input { background-color: transparent !important; }
+                    #chat-input { border-top: 1px solid rgba(255, 0, 115, 0.3) !important; }
+                    
+                    /* Balões de mensagens */
+                    .message.sent { 
+                        background: rgba(255, 0, 115, 0.4) !important; 
+                        border: 1px solid rgba(255, 0, 115, 0.8) !important;
+                        color: aliceblue !important; 
+                        box-shadow: 0 2px 10px rgba(255, 0, 115, 0.2) !important;
+                    }
+                    .message.received { 
+                        background: rgba(182, 182, 182, 0.1) !important; 
+                        border: 1px solid rgba(255, 0, 123, 0.3) !important;
+                        color: aliceblue !important; 
+                        text-shadow: #3a3a3a;
+                    }
+                    
+                    /* Área de digitação e inputs */
+                    #message-input, .form-control { 
+                        background: rgba(255, 255, 255, 0.1) !important; 
+                        border: 1px solid rgba(255, 0, 115, 0.4) !important;
+                        color: aliceblue !important; 
+                    }
+                    #message:empty:before { color: rgba(240, 248, 255, 0.6) !important; }
+                    
+                    /* Timestamps */
+                    .timestamp { 
+                        background-color: transparent !important; 
+                        color: #b3b3b3 !important; 
+                        text-shadow: 1px 1px 2px black !important;
+                    }
+                    
+                    /* Mensagem de ajuda (Tooltip inicial) */
+                    .help-message { 
+                        background: rgba(18, 1, 24, 0.85) !important; 
+                        backdrop-filter: blur(10px) !important;
+                        border: 1px solid #ff0073 !important;
+                        color: aliceblue !important; 
+                        box-shadow: 0 4px 15px rgba(255, 0, 115, 0.3) !important;
+                    }
+                    .help-message-arrow { border-left-color: rgba(18, 1, 24, 0.85) !important; }
+                    .user-info-button { border: 1px solid #ff0073 !important; box-shadow: 0 0 10px rgba(255, 0, 115, 0.4) !important; }
+
+                    /* ====== MODO TELA CHEIA ====== */
+                    
+                    /* Classe ativada manualmente via botão no Desktop */
+                    #chat-popup.fullscreen-mode {
+                        width: 100vw !important;
+                        height: 100vh !important;
+                        max-width: 100% !important;
+                        max-height: 100% !important;
+                        bottom: 0 !important;
+                        right: 0 !important;
+                        border-radius: 0 !important;
+                    }
+                    #chat-popup.fullscreen-mode #chatbox {
+                        height: calc(100vh - 140px) !important;
+                    }
+                    #chat-popup.fullscreen-mode .user-info-container {
+                        height: calc(100vh - 80px) !important;
+                    }
+
+                    /* No Celular: Força tela cheia automática sempre que aberto */
+                    @media (max-width: 768px) {
+                        #chat-popup.open {
+                            width: 100vw !important;
+                            height: 100vh !important;
+                            max-width: 100% !important;
+                            max-height: 100% !important;
+                            bottom: 0 !important;
+                            right: 0 !important;
+                            border-radius: 0 !important;
+                        }
+                        #chat-popup.open #chatbox {
+                            height: calc(100vh - 140px) !important;
+                        }
+                        #chat-popup.open .user-info-container {
+                            height: calc(100vh - 80px) !important;
+                        }
+                        /* Oculta o botão de expandir no celular, pois já estará em tela cheia */
+                        #btn-maximizar-chat {
+                            display: none !important;
+                        }
+                    }
+                `;
+                        container.shadowRoot.appendChild(darkThemeStyle);
+                    }
+
+                    const headerBtnContainer = container.shadowRoot.getElementById('minimize-btn-container');
+                    if (headerBtnContainer && !container.shadowRoot.getElementById('btn-maximizar-chat')) {
+                        const maxBtn = document.createElement('button');
+                        maxBtn.id = 'btn-maximizar-chat';
+
+                        maxBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>';
+
+                        maxBtn.style.cssText = 'background: transparent; border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-right: 8px;';
+
+                        maxBtn.onclick = () => {
+                            const popup = container.shadowRoot.getElementById('chat-popup');
+                            popup.classList.toggle('fullscreen-mode');
+                        };
+
+                        headerBtnContainer.prepend(maxBtn);
+                    }
+
+                    const inputTelefone = container.shadowRoot.getElementById('userPhone');
+                    if (inputTelefone) {
+                        inputTelefone.value = "0";
+                        if (inputTelefone.parentElement) {
+                            inputTelefone.parentElement.style.display = 'none';
+                        }
+                    }
+
+                    return true;
+                }
+                return false;
+            }
+
+            const observer = new MutationObserver((mutations, obs) => {
+                if (aplicarModificacoesChat()) {
+                    obs.disconnect();
+                }
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+        </script>
     </section>
 
-    <script src="animes.js"></script>
 
-    <footer>
+    <footer class="footerr">
         <div class="footer"></div>
         <p>&copy; 2025 EidenFox. Todos os direitos reservados.</p><br>
         <p>Desenvolvido por EidenFox</p>
         </div>
     </footer>
+
+
+
+
+
+
+
 </body>
 
 
