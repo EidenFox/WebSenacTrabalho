@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Meus Animes Favoritos</title>
+
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="teste.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="body-background">
+    <section class="content">
+        <header>
+            <div class="header-div">
+                <h1 class="Titulo">Teste Revenda</h1>
+            </div>
+        </header>
+
+        <button id="Notificame" class="btn" onclick="openModal()">🔗 Hub</button>
+
+        <div class="modal-overlay" id="modal">
+            <div class="modal">
+
+                <div class="header">
+                    <h1>Conectar canais</h1>
+                    <span class="close" onclick="closeModal()">✕</span>
+                </div>
+
+                <div class="grid">
+
+                    <div class="card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+                        <h3>Facebook</h3>
+                        <p>Conecte sua página do Facebook.</p>
+                        <button class="facebook" onclick="openMetaPopup('facebook')">Conectar</button>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+                        <h3>Instagram</h3>
+                        <p>Receba mensagens do Direct.</p>
+                        <button class="instagram" onclick="openMetaPopup('instagram')">Conectar</button>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+                        <h3>WhatsApp</h3>
+                        <p>Conecte seu WhatsApp Business.</p>
+                        <button class="whatsapp" onclick="openMetaPopup('whatsapp')">Conectar</button>
+                    </div>
+
+                </div>
+
+                <div class="token-da-conta" id="token-da-conta">
+                    <label for="company">Token da conta</label>
+                    <input id="company" type="password" placeholder="Token da conta notificame" autofocus required>
+                    <p id="token-error" class="token-error" style="display: none;">Token inválido</p>
+                </div>
+
+                <div id="status" class="status"></div>
+
+            </div>
+        </div>
+
+        <script>
+            const NOTIFICAME_API = "https://api.notificame.com.br";
+            let companyInput = document.getElementById('company');
+            let COMPANY_UUID = companyInput.value || null;
+
+            companyInput.addEventListener('input', () => {
+                COMPANY_UUID = companyInput.value;
+                console.log(COMPANY_UUID);
+            });
+
+            let metaPopup = null;
+
+            function openModal() {
+                document.getElementById("modal").style.display = "flex";
+            }
+
+            function closeModal() {
+                document.getElementById("modal").style.display = "none";
+            }
+
+            function openMetaPopup(flow) {
+
+                const tokenError = document.getElementById("token-error");
+
+                if (!COMPANY_UUID) {
+                    console.log("Token Inválido");
+                    tokenError.style.display = "block";
+                    return;
+                }
+
+                tokenError.style.display = "none";
+
+                const origin = window.location.origin;
+
+                const url =
+                    `${NOTIFICAME_API}/v2/oauth/meta/start` +
+                    `?company_uuid=${COMPANY_UUID}` +
+                    `&redirect_origin=${encodeURIComponent(origin)}` +
+                    `&type=${flow}`;
+
+                metaPopup = window.open(url, "notificameMetaConnect", "width=800,height=900");
+
+                if (!metaPopup) {
+                    setStatus("Popup bloqueado.", false);
+                }
+            }
+
+            function setStatus(message, success) {
+                const el = document.getElementById("status");
+                el.innerText = message;
+                el.className = "status " + (success ? "success" : "error");
+            }
+
+            window.addEventListener("message", (event) => {
+
+                if (event.origin !== NOTIFICAME_API) return;
+                if (!event.data || !event.data.status) return;
+
+                if (event.data.status === "channel-success") {
+                    setStatus("Canal conectado com sucesso!", true);
+                } else {
+                    setStatus("Erro ao conectar canal.", false);
+                }
+
+                if (metaPopup && !metaPopup.closed) {
+                    metaPopup.close();
+                }
+
+            });
+        </script>
+
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 EidenFox. Todos os direitos reservados.</p><br>
+        <p>Desenvolvido por Daniel Rocha da Cruz</p>
+    </footer>
+
+</body>
+
+</html>
