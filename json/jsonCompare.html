@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador JSON / Multi-vias</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Tema Padrão (Dark/Neon baseado no seu estilo, sem glass) */
+            --bg-color: #120118;
+            --panel-bg: #1e0a24;
+            --text-color: aliceblue;
+            --neon-pink: #ff0073;
+            --neon-purple: #81008a;
+            --border-color: rgba(255, 0, 115, 0.5);
+            --header-bg: #2a0b30;
+            --diff-bg: rgba(255, 0, 115, 0.3);
+            --diff-text: #ffffff;
+            --diff-line-bg: rgba(255, 0, 115, 0.15);
+            --font-mono: 'Courier New', Courier, monospace;
+            --font-title: 'Merienda', cursive;
+            --box-height: 300px;
+        }
+
+        body.light-mode {
+            /* Tema Claro (Alternativo) */
+            --bg-color: #f4f4f9;
+            --panel-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #ff0073;
+            --header-bg: #ffe6f0;
+            --diff-bg: #fff3cd;
+            --diff-text: #856404;
+            --diff-line-bg: #fff8e1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        h1, h2, h3, .col-header span {
+            font-family: var(--font-title);
+        }
+
+        h1 {
+            text-align: center;
+            text-shadow: var(--neon-pink) 2px 2px;
+            margin-bottom: 30px;
+        }
+
+        .header-controls {
+            background: var(--panel-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(255, 0, 115, 0.1);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="number"], input[type="range"] {
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        input[type="number"] {
+            width: 60px;
+        }
+
+        button, .file-label {
+            background-color: var(--neon-pink);
+            color: aliceblue;
+            border: 1px solid var(--neon-purple);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            font-family: var(--font-title);
+        }
+
+        button:hover, .file-label:hover {
+            background-color: #d60060;
+            box-shadow: 0 0 10px rgba(255, 0, 115, 0.5);
+        }
+
+        .btn-toggle {
+            background-color: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--text-color);
+        }
+
+        .btn-toggle:hover {
+            background-color: rgba(255, 0, 115, 0.2);
+        }
+
+        .file-label {
+            padding: 4px 8px;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .grid-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .input-col, .diff-col {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .col-header {
+            background: var(--header-bg);
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: var(--box-height);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            resize: none;
+            box-sizing: border-box;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: scroll;
+        }
+
+        textarea:focus {
+            outline: 1px solid var(--neon-pink);
+            outline-offset: -1px;
+        }
+
+        .diff-viewer {
+            height: var(--box-height);
+            overflow-y: auto;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            background: var(--bg-color);
+            white-space: pre;
+        }
+
+        .line {
+            display: flex;
+            padding: 2px 5px;
+            min-height: 18px;
+        }
+
+        .line-num {
+            color: #777;
+            min-width: 35px;
+            text-align: right;
+            margin-right: 15px;
+            user-select: none;
+            border-right: 1px solid var(--border-color);
+            padding-right: 5px;
+        }
+
+        .line.diff {
+            background-color: var(--diff-bg);
+            color: var(--diff-text);
+        }
+
+        .results-list {
+            background: var(--panel-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(255, 0, 115, 0.1);
+        }
+
+        .results-list h3 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .diff-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .diff-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .diff-item ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 10px 0 0 0;
+        }
+
+        .diff-item li {
+            background: var(--diff-line-bg);
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-left: 3px solid var(--neon-pink);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            word-break: break-all;
+            white-space: pre-wrap;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+        /* Scrollbar customizada para combinar com o tema */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-pink);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Comparador Multi-vias</h1>
+
+    <div class="header-controls">
+        <button class="btn-toggle" onclick="toggleTheme()">Alternar Tema Claro/Escuro</button>
+        
+        <div class="control-group">
+            <label for="boxCount">Caixas (2-5):</label>
+            <input type="number" id="boxCount" min="2" max="5" value="3">
+            <button onclick="generateBoxes()">Gerar Caixas</button>
+        </div>
+
+        <div class="control-group">
+            <label for="heightSlider">Tamanho das caixas:</label>
+            <input type="range" id="heightSlider" min="200" max="800" value="300" oninput="updateHeight(this.value)">
+            <span id="heightDisplay">300px</span>
+        </div>
+
+        <button onclick="compareTexts()">Comparar Textos</button>
+    </div>
+
+    <div id="inputsContainer" class="grid-container"></div>
+    
+    <div id="diffsContainer" class="grid-container hidden"></div>
+
+    <div id="resultsContainer" class="results-list hidden">
+        <h3>Lista de Diferenças (Linha por Linha)</h3>
+        <div id="resultsList"></div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        function updateHeight(value) {
+            document.documentElement.style.setProperty('--box-height', value + 'px');
+            document.getElementById('heightDisplay').textContent = value + 'px';
+        }
+
+        function escapeHtml(unsafe) {
+            return (unsafe || '').replace(/&/g, "&amp;")
+                                .replace(/</g, "&lt;")
+                                .replace(/>/g, "&gt;")
+                                .replace(/"/g, "&quot;")
+                                .replace(/'/g, "&#039;");
+        }
+
+        function loadFile(event, index) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('text' + index).value = e.target.result;
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function generateBoxes() {
+            let count = parseInt(document.getElementById('boxCount').value);
+            if (count < 2) count = 2;
+            if (count > 5) count = 5;
+            document.getElementById('boxCount').value = count;
+
+            const container = document.getElementById('inputsContainer');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= count; i++) {
+                const col = document.createElement('div');
+                col.className = 'input-col';
+                col.innerHTML = `
+                    <div class="col-header">
+                        <span>Texto ${i}</span>
+                        <label class="file-label">
+                            Importar Arquivo
+                            <input type="file" accept=".json,.txt,*/*" onchange="loadFile(event, ${i})" style="display:none;">
+                        </label>
+                    </div>
+                    <textarea id="text${i}" placeholder="Cole seu conteúdo aqui..."></textarea>
+                `;
+                container.appendChild(col);
+            }
+
+            document.getElementById('diffsContainer').classList.add('hidden');
+            document.getElementById('resultsContainer').classList.add('hidden');
+        }
+
+        function compareTexts() {
+            const count = parseInt(document.getElementById('boxCount').value);
+            const texts = [];
+            
+            for (let i = 1; i <= count; i++) {
+                const val = document.getElementById(`text${i}`).value;
+                texts.push(val.split('\n'));
+            }
+
+            const maxLines = Math.max(...texts.map(t => t.length));
+            let diffColsHtml = Array(count).fill('');
+            let resultsHtml = '';
+            let hasDifferences = false;
+
+            for (let i = 0; i < maxLines; i++) {
+                const currentLines = texts.map(t => t[i] !== undefined ? t[i] : '');
+                const isDiff = !currentLines.every(val => val === currentLines[0]);
+
+                currentLines.forEach((line, colIndex) => {
+                    const safeLine = escapeHtml(line) || ' ';
+                    const diffClass = isDiff ? ' diff' : '';
+                    diffColsHtml[colIndex] += `<div class="line${diffClass}"><span class="line-num">${i + 1}</span><span class="content">${safeLine}</span></div>`;
+                });
+
+                if (isDiff) {
+                    hasDifferences = true;
+                    resultsHtml += `<div class="diff-item"><strong>Linha ${i + 1}</strong><ul>`;
+                    currentLines.forEach((line, colIndex) => {
+                        resultsHtml += `<li><strong>Texto ${colIndex + 1}:</strong> ${escapeHtml(line) || '<em>(linha vazia)</em>'}</li>`;
+                    });
+                    resultsHtml += `</ul></div>`;
+                }
+            }
+
+            const diffsContainer = document.getElementById('diffsContainer');
+            diffsContainer.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const col = document.createElement('div');
+                col.className = 'diff-col';
+                col.innerHTML = `
+                    <div class="col-header">
+                        <span>Comparação ${i + 1}</span>
+                    </div>
+                    <div class="diff-viewer">${diffColsHtml[i]}</div>
+                `;
+                diffsContainer.appendChild(col);
+            }
+
+            const resultsList = document.getElementById('resultsList');
+            if (!hasDifferences) {
+                resultsList.innerHTML = '<p>Nenhuma diferença encontrada. Os textos são idênticos.</p>';
+            } else {
+                resultsList.innerHTML = resultsHtml;
+            }
+
+            diffsContainer.classList.remove('hidden');
+            document.getElementById('resultsContainer').classList.remove('hidden');
+        }
+
+        window.onload = generateBoxes;
+    </script>
+</body>
+</html>
