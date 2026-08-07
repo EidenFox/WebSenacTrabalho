@@ -77,7 +77,7 @@
 
             companyInput.addEventListener('input', () => {
                 COMPANY_UUID = companyInput.value;
-                console.log(COMPANY_UUID);
+                // console.log(COMPANY_UUID);
             });
 
             let metaPopup = null;
@@ -111,6 +111,7 @@
                     `&type=${flow}`;
 
                 metaPopup = window.open(url, "notificameMetaConnect", "width=800,height=900");
+                console.log(metaPopup);
 
                 if (!metaPopup) {
                     setStatus("Popup bloqueado.", false);
@@ -128,7 +129,15 @@
                 if (event.origin !== NOTIFICAME_API) return;
                 if (!event.data || !event.data.status) return;
 
+                if (true) {
+                    console.log(event);
+                }
+
                 if (event.data.status === "channel-success") {
+
+                    // RETORNO DO TOKEN EM CASO DE SUCESSO
+                    console.log("event.data", event.data);
+
                     setStatus("Canal conectado com sucesso!", true);
                 } else {
                     setStatus("Erro ao conectar canal.", false);
