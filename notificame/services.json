@@ -1,0 +1,117 @@
+{
+  "Api": {
+    "Revendas": [
+      "Listar subcontas",
+      "Criar subconta",
+      "Editar subconta"
+    ],
+    "Whatsapp Templates": [
+      "Criar um template com parâmetros",
+      "Listar templates",
+      "Enviar template - Sem parâmetros",
+      "Enviar template - Com parâmetros (tipo número/positional)",
+      "Enviar template - Com parâmetros (tipo nome/named)",
+      "Enviar tempate - Marketing Messages Lite API",
+      "Excluir template"
+    ],
+    "Whatsapp": [
+      "Enviar uma mensagem de texto",
+      "Enviar uma mensagem de áudio",
+      "Enviar um sticker",
+      "Enviar um arquivo (documentos, imagens, vídeos…)",
+      "Upload de arquivo (WhatsApp Meta)",
+      "Enviar localização",
+      "Enviar mensagem interativa com botões",
+      "Enviar mensagem interativa com listas",
+      "Enviar mensagem interativa com link / CTA",
+      "Reagir a uma mensagem",
+      "Responder uma mensagem (marcar mensagem)",
+      "Fazer o download de um arquivo criptografado",
+      "Veja a saúde do número",
+      "Listar usuários bloqueados",
+      "Bloquear usuário",
+      "Desbloquear usuário",
+      "Balão de digitando",
+      "Enviar contato",
+      "Criar convite de app",
+      "Listar convite de app"
+    ],
+    "Instagram": [
+      "Enviar uma mensagem de texto",
+      "Enviar uma mensagem de áudio",
+      "Enviar um arquivo (imagens, vídeos…)",
+      "Responder um comentário",
+      "Enviar template de botões",
+      "Enviar Quick Reply (respostas rápidas)",
+      "Esconder comentário",
+      "Fazer uma publicação",
+      "Listar postagens da conta"
+    ],
+    "Facebook": [
+      "Enviar uma mensagem de texto",
+      "Enviar uma mensagem de áudio",
+      "Enviar um arquivo (imagens, vídeos…)",
+      "Enviar um template genérico",
+      "Enviar um template de botão",
+      "Enviar um template de mídia",
+      "Enviar Quick Reply (respostas rápidas)",
+      "Esconder comentário",
+      "Responder um comentário do facebook"
+    ],
+    "Meta Ads": [
+      "Listar contas de anúncio",
+      "Listar campanhas",
+      "Consultar métricas",
+      "Consultar insights das campanhas",
+      "Listar anúncios",
+      "Consultar detalhe da campanha"
+    ],
+    "Telegram": [
+      "Enviar uma mensagem de texto",
+      "Enviar uma mensagem de áudio",
+      "Enviar um arquivo (documento, imagens, vídeos…)"
+    ],
+    "Mercado Livre": [
+      "Responder uma pergunta",
+      "Buscar anúncio publicado"
+    ],
+    "Webchat": [
+      "Enviar uma mensagem de texto",
+      "Enviar um arquivo (documento, imagens, vídeos…)"
+    ],
+    "Email": [
+      "Enviar um email (somente texto)",
+      "Enviar um email (com arquivos)"
+    ],
+    "Olx": [
+      "Enviar uma mensagem de texto"
+    ],
+    "Linkedin": [
+      "Publicar um texto",
+      "Publicar um artigo",
+      "Publicar uma imagem",
+      "Publicar um vídeo",
+      "Buscar comentários",
+      "Responder comentário"
+    ],
+    "Google Business": [
+      "Buscar contas de empresas",
+      "Buscar localizações",
+      "Listar Reviews",
+      "Responder uma Review"
+    ],
+    "Youtube": [
+      "Listar perfil do canal",
+      "Listar Vídeos",
+      "Listar comentários",
+      "Fazer comentários",
+      "Responder comentários"
+    ],
+    "TikTok": [
+      "Responder uma mensagem",
+      "Mandar uma imagem",
+      "Responder a um comentário",
+      "Baixar arquivos"
+    ]
+  }
+}

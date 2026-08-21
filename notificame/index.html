@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seamless NotificameHub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="notificame.css">
+    <link rel="icon" type="image/i-icon" href="img/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Permanent+Marker&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="body-background">
+    <div id="toast-notification"></div>
+    <section class="content">
+        <header>
+            <div class="header-div">
+                <h1 class="Titulo">Conectar</h1>
+            </div>
+        </header>
+
+        <!-- Container de Autenticação -->
+        <div id="auth-container" class="chat-container">
+            <!-- Login -->
+            <div id="login-box" class="chat-box"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h2>Login</h2>
+                <div class="chat-form" style="flex-direction: column; width: 100%; gap: 1rem;">
+                    <input type="email" id="login-email" placeholder="E-mail" required>
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                    <button onclick="realizarLogin()">Entrar</button>
+                </div>
+                <p style="margin-top: 1rem; cursor: pointer; color: #ff008c;" onclick="alternarFormulariosAuth()">Não
+                    tem conta? Cadastre-se</p>
+            </div>
+
+            <!-- Cadastro -->
+            <div id="register-box" class="chat-box"
+                style="display: none; flex-direction: column; align-items: center; justify-content: center;">
+                <h2>Cadastro</h2>
+                <div class="chat-form" style="flex-direction: column; width: 100%; gap: 1rem;">
+                    <input type="text" id="reg-nome" placeholder="Nome" required>
+                    <input type="text" id="reg-cpfcnpj" placeholder="CPF/CNPJ" required>
+                    <input type="email" id="reg-email" placeholder="E-mail" required>
+                    <input type="password" id="reg-password" placeholder="Senha" required>
+                    <button onclick="criarConta()">Cadastrar</button>
+                </div>
+                <p style="margin-top: 1rem; cursor: pointer; color: #ff008c;" onclick="alternarFormulariosAuth()">Já
+                    possui conta? Faça Login</p>
+            </div>
+        </div>
+
+        <!-- Container do App Seamless (Oculto até o login) -->
+        <div id="app-container" style="display: none;">
+            <button id="Notificame" class="btn" onclick="openModal()">🔗 Hub</button>
+
+            <div class="modal-overlay" id="modal">
+                <div class="modal">
+
+                    <div class="header">
+                        <h1>Conectar canais</h1>
+                        <span class="close" onclick="closeModal()">✕</span>
+                    </div>
+
+                    <p id="user-greeting"
+                        style="text-align: center; color: #ffffff; font-weight: bold; text-shadow: 1px 1px 2px rgba(255,255,255,0.9);">
+                        Bem-vindo(a), <span id="display-user-name">Usuário</span>!<br>
+                        Você tem <span id="display-user-channels" style="color: #ff008c">X</span> canais disponiveis!
+                    </p>
+
+                    <div class="grid">
+                        <div class="card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                            <h3>Facebook</h3>
+                            <p>Conecte sua página do Facebook.</p>
+                            <button class="facebook" onclick="openMetaPopup('facebook')">Conectar</button>
+                        </div>
+
+                        <div class="card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                            <h3>Instagram</h3>
+                            <p>Receba mensagens do Direct.</p>
+                            <button class="instagram" onclick="openMetaPopup('instagram')">Conectar</button>
+                        </div>
+
+                        <div class="card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+                            <h3>WhatsApp</h3>
+                            <p>Conecte seu WhatsApp Business.</p>
+                            <button class="whatsapp" onclick="openMetaPopup('whatsapp')">Conectar</button>
+                        </div>
+                    </div>
+
+                    <p id="token-error" class="token-error" style="display: none;">Token inválido ou não autenticado.
+                    </p>
+                    <div id="status" class="status"></div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 EidenFox. Todos os direitos reservados.</p><br>
+        <p>Desenvolvido por Daniel Rocha da Cruz</p>
+    </footer>
+
+    <!-- Biblioteca Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Scripts da aplicação -->
+    <script src="auth.js"></script>
+    <script src="notificame.js"></script>
+    <script src="seamless.js"></script>
+</body>
+
+</html>
