@@ -17,8 +17,8 @@ async function loadAnimes() {
                 linksHtml += `<li><a href="${anime.linkCrunchyroll}" target="_blank">Crunchyroll</a></li>`;
             }
 
-            if (anime.linkAnimeKai) {
-                linksHtml += `<li><a href="${anime.linkAnimeKai}" target="_blank">Anime Kai</a></li>`;
+            if (anime.linkAnikototv) {
+                linksHtml += `<li><a href="${anime.linkAnikototv}" target="_blank">AnikotoTv</a></li>`;
             }
 
             if (anime.linkOutro && anime.nomeOutro) {
