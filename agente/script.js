@@ -1,26 +1,87 @@
+/* INICIO DE FUNÇÃO DE PARSER DE MARKDOWN; esta função converte a formatação enviada pela IA (negrito, títulos, quebras de linha) em tags HTML interpretáveis pelo navegador */
+function formatMarkdown(text) {
+    let html = text;
+
+    // Títulos (###, ##, #)
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+    // Negrito (**texto**)
+    html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+
+    // Itálico (*texto*)
+    html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+
+    // Listas simples (- item ou * item)
+    html = html.replace(/^\- (.*$)/gim, '<ul><li>$1</li></ul>');
+    html = html.replace(/^\* (.*$)/gim, '<ul><li>$1</li></ul>');
+    // Agrupa listas consecutivas removendo as quebras entre elas
+    html = html.replace(/<\/ul><br><ul>/gim, '');
+
+    // Linha de separação (---)
+    html = html.replace(/^---$/gim, '<hr class="chat-divider">');
+
+    // Quebras de linha (\n)
+    html = html.replace(/\n/gim, '<br>');
+
+    return html;
+}
+
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
 const messagesBox = document.getElementById('messages-box');
+const clearChatButton = document.getElementById('clear-chat-button');
 
-// URL do webhook que será futuramente consultada de forma dinâmica no banco de dados (Supabase/Vercel)
-let webhookUrl = 'URL_DO_SEU_WEBHOOK_N8N_AQUI';
+let sessionId = localStorage.getItem('chat_session_id');
+if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('chat_session_id', sessionId);
+}
+
+let webhookUrl = 'https://eidenfox.app.n8n.cloud/webhook/chat';
 
 function appendMessage(sender, text) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'ai-message');
 
+    if (sender === 'ai') {
+        const iconImg = document.createElement('img');
+        iconImg.src = '../img/favicon.ico';
+        iconImg.alt = 'Ícone do Agente';
+        iconImg.classList.add('agent-icon');
+        messageDiv.appendChild(iconImg);
+    }
+
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
-    
-    const paragraph = document.createElement('p');
-    paragraph.textContent = text;
-    
-    contentDiv.appendChild(paragraph);
+
+    if (sender === 'ai') {
+        contentDiv.innerHTML = formatMarkdown(text);
+    } else {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        contentDiv.appendChild(paragraph);
+    }
+
     messageDiv.appendChild(contentDiv);
     messagesBox.appendChild(messageDiv);
 
     messagesBox.scrollTop = messagesBox.scrollHeight;
 }
+
+clearChatButton.addEventListener('click', () => {
+    messagesBox.innerHTML = `
+        <div class="message ai-message">
+            <img src="../img/favicon.ico" alt="Ícone do Agente" class="agent-icon">
+            <div class="message-content">
+                <p>Olá! Sou o assistente de IA. Como posso te ajudar hoje?</p>
+            </div>
+        </div>
+    `;
+    sessionId = crypto.randomUUID();
+    localStorage.setItem('chat_session_id', sessionId);
+});
 
 async function sendMessage() {
     const text = messageInput.value.trim();
@@ -28,13 +89,13 @@ async function sendMessage() {
 
     appendMessage('user', text);
     messageInput.value = '';
-    messageInput.style.height = 'auto'; 
+    messageInput.style.height = 'auto';
 
     const typingId = 'typing-' + Date.now();
     const typingDiv = document.createElement('div');
     typingDiv.classList.add('message', 'ai-message');
     typingDiv.id = typingId;
-    typingDiv.innerHTML = '<div class="message-content"><p>Digitando...</p></div>';
+    typingDiv.innerHTML = '<img src="../img/favicon.ico" alt="Ícone do Agente" class="agent-icon"><div class="message-content"><p>Digitando...</p></div>';
     messagesBox.appendChild(typingDiv);
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
@@ -45,8 +106,8 @@ async function sendMessage() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                sessionId: "sessao-" + Date.now(), 
-                message: text 
+                sessionId: sessionId,
+                message: text
             })
         });
 
@@ -55,10 +116,9 @@ async function sendMessage() {
         }
 
         const data = await response.json();
-        
+
         document.getElementById(typingId).remove();
 
-        // O campo 'data.output' deve corresponder à chave json que o seu n8n vai retornar no final do fluxo
         const respostaIA = data.output || data.response || data.message || 'Resposta recebida, ajuste a chave do JSON no script.js';
         appendMessage('ai', respostaIA);
 
@@ -78,7 +138,7 @@ messageInput.addEventListener('keypress', function (e) {
     }
 });
 
-messageInput.addEventListener('input', function() {
+messageInput.addEventListener('input', function () {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
     if (this.scrollHeight > 150) {
