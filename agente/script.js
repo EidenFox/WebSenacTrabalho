@@ -32,6 +32,7 @@ const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
 const messagesBox = document.getElementById('messages-box');
 const clearChatButton = document.getElementById('clear-chat-button');
+const chatContainer = document.querySelector('.chat-container');
 
 let sessionId = localStorage.getItem('chat_session_id');
 if (!sessionId) {
@@ -67,7 +68,7 @@ function appendMessage(sender, text) {
     messageDiv.appendChild(contentDiv);
     messagesBox.appendChild(messageDiv);
 
-    messagesBox.scrollTop = messagesBox.scrollHeight;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
 clearChatButton.addEventListener('click', () => {
@@ -97,7 +98,7 @@ async function sendMessage() {
     typingDiv.id = typingId;
     typingDiv.innerHTML = '<img src="../img/favicon.ico" alt="Ícone do Agente" class="agent-icon"><div class="message-content"><p>Digitando...</p></div>';
     messagesBox.appendChild(typingDiv);
-    messagesBox.scrollTop = messagesBox.scrollHeight;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 
     try {
         const response = await fetch(webhookUrl, {
